@@ -1,9 +1,10 @@
 package mypasswd
 
 import (
-	"github.com/stretchr/testify/assert"
 	. "mypasswd"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPassword(t *testing.T) {

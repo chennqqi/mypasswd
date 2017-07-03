@@ -30,3 +30,13 @@ $ mypasswd -p FOOBARZOO
 $ echo FOOBARZOO | mypasswd -old
 6e35068701b1cc8b
 ```
+
+
+```
+	m := &mypasswd.Mypasswd{}
+	m.Passwd = "XXXX"
+	m.Old = false
+	hash, err = m.Passwd()
+	fmt.Println(hash, err)
+
+```

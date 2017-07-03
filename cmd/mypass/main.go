@@ -1,12 +1,15 @@
-package mypasswd
+package main
 
 import (
-	"bufio"
-	"flag"
-	"io/ioutil"
-	"os"
-	"strings"
+	"fmt"
+	"log"
+
+	"github.com/chennqqi/mypasswd"
 )
+
+func init() {
+	log.SetFlags(0)
+}
 
 func readStdin() (string, error) {
 	reader := bufio.NewReader(os.Stdin)
@@ -22,7 +25,16 @@ func readStdin() (string, error) {
 	return str, nil
 }
 
-func ParseFlag(m *Mypasswd) (err error) {
+func main() {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	m := &mypasswd.Mypasswd{}
+
+	var err error
 	flag.StringVar(&m.Passwd, "p", "", "Password string")
 	flag.BoolVar(&m.Old, "old", false, "Returns the value of the pre-4.1 implementation of PASSWORD()")
 	flag.Parse()
@@ -31,5 +43,15 @@ func ParseFlag(m *Mypasswd) (err error) {
 		m.Passwd, err = readStdin()
 	}
 
-	return
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	hash, err := m.Password()
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(hash)
 }
