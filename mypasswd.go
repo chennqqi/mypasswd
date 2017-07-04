@@ -28,12 +28,7 @@ char *password(char* str, int old) {
 import "C"
 
 import (
-	"bufio"
-	"crypto/aes"
-	"crypto/cipher"
 	"fmt"
-	"os"
-	"strings"
 	"unsafe"
 )
 
